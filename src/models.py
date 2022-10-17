@@ -38,9 +38,11 @@ class Post(Base):
     __tablename__ = 'post'
     id = Column(Integer, primary_key=True)
     user_id = Column(Integer,  ForeignKey('usuario.id'))
+    comments = relationship("Comentarios", backref="comentarios")
+    media = relationship("Media", backref="media")
 
-class Comments(Base):
-    __tablename__ = 'comments'
+class Comentarios(Base):
+    __tablename__ = 'comentarios'
     id = Column(Integer, primary_key=True)
     comentario = Column(String(250), nullable=False)
     author_id = Column(Integer,  ForeignKey('usuario.id'))
@@ -49,7 +51,7 @@ class Comments(Base):
 class Media(Base):
     __tablename__ = 'media'
     id = Column(Integer, primary_key=True)
-    media = Column(String(250), nullable=False)
+    media_id = Column(String(250), nullable=False)
     url = Column(String(250), nullable=False)
     id_post = Column(Integer,  ForeignKey('post.id'))
 
